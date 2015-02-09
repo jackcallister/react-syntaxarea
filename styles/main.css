@@ -1,0 +1,56 @@
+@-webkit-keyframes blinker {  
+  0% { visibility: visible; }
+  50% { visibility: hidden; }
+  100% { visibility: visible; }
+}
+
+.syntaxarea pre, .syntaxarea textarea {
+  font-size: 24px;
+  font-family: sans-serif;
+  color: black;
+}
+
+.syntaxarea {
+  overflow: auto;
+  position: relative;
+}
+
+.syntaxarea pre {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: inline;
+  pointer-events: none;
+  margin: 0;
+  padding: 0;
+}
+
+.syntaxarea textarea {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: 0;
+  outline: none;
+  resize: none;
+  min-width: 100%;
+  min-height: 100%;
+  overflow: hidden;
+  color: transparent;
+}
+
+.syntaxarea .caret {
+  width: 3px;
+  height: 30px;
+  background: green;
+  position: absolute; 
+}
+
+.caret.hidden {
+  opacity: 0;
+}
+
+.caret.blink {
+  -webkit-animation: blinker steps(1) 1s infinite;
+}

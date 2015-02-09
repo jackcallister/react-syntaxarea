@@ -1,5 +1,5 @@
 var React = require('react');
-var SyntaxArea = require('./syntax-area');
+var Syntaxarea = require('./syntaxarea');
 
 var rules = {
   whitespace: /\s+/,
@@ -18,7 +18,7 @@ var App = React.createClass({
   render: function() {
     return (
       <div className='example-app'>
-        <SyntaxArea rules={rules} />
+        <Syntaxarea rules={rules} />
       </div>
     )
   }
