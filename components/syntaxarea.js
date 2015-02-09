@@ -21,7 +21,7 @@ var Syntaxarea = React.createClass({
     var coordinates = Measurement(e.target, e.target.selectionEnd);
 
     this.setState({
-      caretTop: coordinates.top,
+      caretTop: coordinates.top - 4,
       caretLeft: coordinates.left,
       caretVisibilityClass: 'solid'
     });
@@ -32,21 +32,21 @@ var Syntaxarea = React.createClass({
       case 'None':
         setTimeout(function() {
           t.setState({
-            caretVisibilityClass: 'blink' 
+            caretVisibilityClass: 'blink'
           });
         }, 500);
         break;
       case 'Range':
         setTimeout(function() {
           t.setState({
-            caretVisibilityClass: 'solid' 
+            caretVisibilityClass: 'solid'
           });
         }, 500);
         break;
       case 'Caret':
         setTimeout(function() {
           t.setState({
-            caretVisibilityClass: 'blink' 
+            caretVisibilityClass: 'blink'
           });
         }, 500);
         break;
@@ -64,8 +64,11 @@ var Syntaxarea = React.createClass({
 
     if (tokens) {
       return spans = tokens.map(function(token, index) {
-        return ( 
-          <span className={parser.identify(tokens[index])} key={'token-' + index}>{tokens[index]}</span>
+        return (
+          <span className={parser.identify(tokens[index])}
+                key={'token-' + index}>
+            {tokens[index]}
+          </span>
         )
       });
     }
@@ -82,7 +85,7 @@ var Syntaxarea = React.createClass({
 
   render: function() {
     var output = this._renderOutput();
-    
+
     var caretStyle = {
       top: this.state.caretTop + 'px',
       left: this.state.caretLeft + 'px'

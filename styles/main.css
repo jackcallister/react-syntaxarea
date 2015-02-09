@@ -1,18 +1,17 @@
-@-webkit-keyframes blinker {  
+@-webkit-keyframes blinker {
   0% { visibility: visible; }
   50% { visibility: hidden; }
   100% { visibility: visible; }
+}
+
+.syntaxarea {
+  position: relative;
 }
 
 .syntaxarea pre, .syntaxarea textarea {
   font-size: 24px;
   font-family: sans-serif;
   color: black;
-}
-
-.syntaxarea {
-  overflow: auto;
-  position: relative;
 }
 
 .syntaxarea pre {
@@ -43,8 +42,8 @@
 .syntaxarea .caret {
   width: 3px;
   height: 30px;
-  background: green;
-  position: absolute; 
+  background: #41A8F9;
+  position: absolute;
 }
 
 .caret.hidden {

@@ -1,15 +1,10 @@
-
-// The properties that we copy into a mirrored div.
-// Note that some browsers, such as Firefox,
-// do not concatenate properties, i.e. padding-top, bottom etc. -> padding,
-// so we have to do every single property specifically.
 var properties = [
-  'direction',  // RTL support
+  'direction',
   'boxSizing',
-  'width',  // on Chrome and IE, exclude the scrollbar, so the mirror div wraps exactly as the textarea does
+  'width',
   'height',
   'overflowX',
-  'overflowY',  // copy the scrollbar for IE
+  'overflowY',
 
   'borderTopWidth',
   'borderRightWidth',
@@ -21,7 +16,6 @@ var properties = [
   'paddingBottom',
   'paddingLeft',
 
-  // https://developer.mozilla.org/en-US/docs/Web/CSS/font
   'fontStyle',
   'fontVariant',
   'fontWeight',
@@ -34,7 +28,7 @@ var properties = [
   'textAlign',
   'textTransform',
   'textIndent',
-  'textDecoration',  // might not make a difference, but better be safe
+  'textDecoration',
 
   'letterSpacing',
   'wordSpacing'
@@ -72,7 +66,7 @@ var getCaretCoordinatesFn = function (element, position, recalculate) {
       style.overflowY = 'scroll';
   } else {
     style.overflow = 'hidden';  // for Chrome to not render a scrollbar; IE keeps overflowY = 'scroll'
-  }  
+  }
 
   div.textContent = element.value.substring(0, position);
   // the second special handling for input type="text" vs textarea: spaces need to be replaced with non-breaking spaces - http://stackoverflow.com/a/13402035/1269037

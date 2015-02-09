@@ -1,17 +1,8 @@
 var React = require('react');
+var Markdown = require('../helpers/markdown');
 var Syntaxarea = require('./syntaxarea');
 
-var rules = {
-  whitespace: /\s+/,
-  red: /red/,
-  orange: /orange/,
-  yellow: /yellow/,
-  green: /green/,
-  blue: /blue/,
-  indigo: /indigo/,
-  violet: /violet/,
-  other: /\S+/
-}
+var rules = Markdown.rules;
 
 var App = React.createClass({
 
