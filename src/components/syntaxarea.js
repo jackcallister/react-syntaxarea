@@ -5,9 +5,13 @@ var Parser = require('../helpers/parser');
 var Measurement = require('../helpers/measurement');
 var TextArea = require('react-textarea-autosize');
 
+var timers = [];
+
 var Syntaxarea = React.createClass({
 
   displayName: 'syntaxtarea',
+
+  _typingTimer: null,
 
   _onChange: function(e) {
     this.setState({value: e.target.value});
@@ -17,37 +21,36 @@ var Syntaxarea = React.createClass({
   _updateCaretPosition: function(e) {
     var coordinates = Measurement(e.target, e.target.selectionEnd);
 
+    timers.forEach(function(timer) {
+      clearTimeout(timer);
+    });
+
     this.setState({
       caretTop: coordinates.top - 4,
       caretLeft: coordinates.left,
       caretVisibilityClass: 'solid'
     });
 
-    var selection = window.getSelection().type;
-    var t = this;
-    switch(selection) {
-      case 'None':
-        setTimeout(function() {
-          t.setState({
-            caretVisibilityClass: 'blink'
-          });
-        }, 500);
-        break;
-      case 'Range':
-        setTimeout(function() {
-          t.setState({
-            caretVisibilityClass: 'solid'
-          });
-        }, 500);
-        break;
-      case 'Caret':
-        setTimeout(function() {
-          t.setState({
-            caretVisibilityClass: 'blink'
-          });
-        }, 500);
-        break;
+    var setBlinker = function() {
+      this.setState({
+        caretVisibilityClass: 'blink'
+      });
+    }.bind(this);
+
+    if (window.getSelection().type == 'Range') {
+      this.setState({
+        caretVisibilityClass: 'hidden'
+      });
+    } else if (window.getSelection().type == 'Caret') {
+      var timer = setTimeout(setBlinker, 100);
+      timers.push(timer);
     }
+  },
+
+  _hideCaret: function(e) {
+    this.setState({
+      caretVisibilityClass: 'hidden'
+    });
   },
 
   _renderOutput: function() {
@@ -74,10 +77,16 @@ var Syntaxarea = React.createClass({
   getInitialState: function() {
     return {
       value: '',
-      caretTop: 0,
+      caretTop: -4,
       caretLeft: 0,
       caretVisibilityClass: 'blink'
     };
+  },
+
+  componentDidMount: function() {
+    document.addEventListener('mousedown', this._hideCaret);
+    document.addEventListener('select', this._hideCaret);
+    document.addEventListener('mouseup', this._updateCaretPosition);
   },
 
   render: function() {
@@ -101,12 +110,13 @@ var Syntaxarea = React.createClass({
                   onKeyPress={this._updateCaretPosition}
                   onKeyUp={this._updateCaretPosition}
                   onKeyDown={this._updateCaretPosition}
-                  onFocus={this._updateCaretPosition}
-                  onClick={this._updateCaretPosition}
+                  onFocus={this._setCaretBlinker}
+                  onClick={this._setCaretBlinker}
                   onChange={this._onChange}>
         </TextArea>
 
-        <div className={'caret ' + this.state.caretVisibilityClass} style={caretStyle}></div>
+        <div className={'caret ' + this.state.caretVisibilityClass}
+             style={caretStyle}></div>
       </div>
     );
   }
