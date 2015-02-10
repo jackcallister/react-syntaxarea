@@ -44,11 +44,8 @@
 }
 
 .syntaxarea .caret {
-
-  /*display: none;*/
-
   width: 3px;
-  height: 30px;
+  height: 28px;
   background: #41A8F9;
   position: absolute;
 }
