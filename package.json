@@ -2,7 +2,7 @@
   "author": "Jack Callister",
   "license": "ISC",
   "name": "react-syntaxarea",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A textarea syntax highlighter for React JS",
   "main": "src/components/syntaxarea.js",
   "dependencies": {
