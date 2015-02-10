@@ -4,7 +4,7 @@
   "name": "react-syntaxarea",
   "version": "0.0.1",
   "description": "A textarea syntax highlighter for React JS",
-  "main": "components/syntaxarea.js",
+  "main": "src/components/syntaxarea.js",
   "dependencies": {
     "css-loader": "^0.9.1",
     "react": "^0.12.0",
