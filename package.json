@@ -18,5 +18,10 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/jarsbe/react-syntaxarea.git"
+  },
+  "scripts": {
+    "start": "npm run webpack & npm run serve",
+    "webpack": "webpack -w",
+    "serve": "cd example && python -m SimpleHTTPServer"
   }
 }
