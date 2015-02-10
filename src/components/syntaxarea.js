@@ -3,6 +3,7 @@ require('../styles/main.css');
 var React = require('react');
 var Parser = require('../helpers/parser');
 var Measurement = require('../helpers/measurement');
+var TextArea = require('react-textarea-autosize');
 
 var Syntaxarea = React.createClass({
 
@@ -11,10 +12,6 @@ var Syntaxarea = React.createClass({
   _onChange: function(e) {
     this.setState({value: e.target.value});
     this._updateCaretPosition(e);
-  },
-
-  _onKeyDown: function(e) {
-    console.log('key down');
   },
 
   _updateCaretPosition: function(e) {
@@ -77,8 +74,8 @@ var Syntaxarea = React.createClass({
   getInitialState: function() {
     return {
       value: '',
-      caretTop: null,
-      caretLeft: null,
+      caretTop: 0,
+      caretLeft: 0,
       caretVisibilityClass: 'blink'
     };
   },
@@ -93,17 +90,21 @@ var Syntaxarea = React.createClass({
 
     return (
       <div className='syntaxarea'>
-        <pre>
+        <div className='output'>
           {output}
-        </pre>
+        </div>
 
-        <textarea ref='input' value={this.state.value}
-                              onKeyPress={this._updateCaretPosition}
-                              onKeyUp={this._updateCaretPosition}
-                              onKeyDown={this._updateCaretPosition}
-                              onFocus={this._updateCaretPosition}
-                              onClick={this._updateCaretPosition}
-                              onChange={this._onChange} />
+        <TextArea className='input'
+                  ref='input'
+                  autoFocus={true}
+                  value={this.state.value}
+                  onKeyPress={this._updateCaretPosition}
+                  onKeyUp={this._updateCaretPosition}
+                  onKeyDown={this._updateCaretPosition}
+                  onFocus={this._updateCaretPosition}
+                  onClick={this._updateCaretPosition}
+                  onChange={this._onChange}>
+        </TextArea>
 
         <div className={'caret ' + this.state.caretVisibilityClass} style={caretStyle}></div>
       </div>
