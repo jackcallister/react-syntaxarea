@@ -26,7 +26,7 @@ var Syntaxarea = React.createClass({
     });
 
     this.setState({
-      caretTop: coordinates.top - 4,
+      caretTop: coordinates.top,
       caretLeft: coordinates.left,
       caretVisibilityClass: 'solid'
     });
@@ -77,7 +77,7 @@ var Syntaxarea = React.createClass({
   getInitialState: function() {
     return {
       value: '',
-      caretTop: -4,
+      caretTop: 0,
       caretLeft: 0,
       caretVisibilityClass: 'blink'
     };
